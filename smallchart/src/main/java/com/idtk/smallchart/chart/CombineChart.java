@@ -27,7 +27,7 @@ public class CombineChart extends BarLineCurveChart<IBarLineCurveData> implement
 
     private BarChartRender mBarChartRender;
     private LineChartRender mLineChartRender;
-    private CurveChartRender curveChartRender;
+    private CurveChartRender mCurveChartRender;
     private float barWidth = 30;
 //    private PointData mPointData = new PointData();
 //    private float pointOutRadius;
@@ -84,11 +84,11 @@ public class CombineChart extends BarLineCurveChart<IBarLineCurveData> implement
             }
         }
 
-        for (int i=0; i<mDataList.size(); i++){
+        /*for (int i=0; i<mDataList.size(); i++){
             String cl = mDataList.get(i).getClass().getSimpleName();
-            /**
+            *//**
              * 判断Data类型
-             */
+             *//*
             switch (cl){
                 case "BarData":
                     offset = mXAxisData.getInterval()*mXAxisData.getAxisScale()/2-barWidth*k/2+barWidth*j;
@@ -106,6 +106,25 @@ public class CombineChart extends BarLineCurveChart<IBarLineCurveData> implement
                             mXAxisData.getInterval()*mXAxisData.getAxisScale()/2);
                     chartRenderList.add(mLineChartRender);
                     break;
+            }
+        }*/
+        for (int i=0; i<mDataList.size(); i++){
+            /**
+             * 判断Data类型
+             */
+            if (mDataList.get(i) instanceof IBarData){
+                offset = mXAxisData.getInterval()*mXAxisData.getAxisScale()/2-barWidth*k/2+barWidth*j;
+                mBarChartRender = new BarChartRender((IBarData) mDataList.get(i),mXAxisData,mYAxisData,offset,barWidth);
+                chartRenderList.add(mBarChartRender);
+                j++;
+            } else if (mDataList.get(i) instanceof ICurveData){
+                mCurveChartRender = new CurveChartRender((ICurveData) mDataList.get(i),mXAxisData,mYAxisData,
+                        mXAxisData.getInterval()*mXAxisData.getAxisScale()/2);
+                chartRenderList.add(mCurveChartRender);
+            } else if (mDataList.get(i) instanceof ILineData){
+                mLineChartRender = new LineChartRender((ILineData) mDataList.get(i),mXAxisData,mYAxisData,
+                        mXAxisData.getInterval()*mXAxisData.getAxisScale()/2);
+                chartRenderList.add(mLineChartRender);
             }
         }
     }

@@ -46,6 +46,8 @@ public class PieChart extends PieRadarChart<IPieData> implements IPieChart{
     public boolean isAnimated = true,isTouch = true;
 
     private int angleId = -1;
+    // 点击判断
+    private boolean isDownTouch = false;
 
     public PieChart(Context context) {
         super(context);
@@ -180,13 +182,17 @@ public class PieChart extends PieRadarChart<IPieData> implements IPieChart{
                         PieChartRender pieChartRender = (PieChartRender)chartRenderList.get(angleId);
                         pieChartRender.setTouchFlag(true);
                         invalidate();
+                        isDownTouch = true;
                     }
                     return true;
                 case MotionEvent.ACTION_UP:
-                    PieChartRender pieChartRender = (PieChartRender)chartRenderList.get(angleId);
-                    pieChartRender.setTouchFlag(false);
-                    invalidate();
-                    return true;
+                    if (isDownTouch){
+                        PieChartRender pieChartRender = (PieChartRender)chartRenderList.get(angleId);
+                        pieChartRender.setTouchFlag(false);
+                        invalidate();
+                        isDownTouch = false;
+                        return true;
+                    }
             }
         }
         return super.onTouchEvent(event);
