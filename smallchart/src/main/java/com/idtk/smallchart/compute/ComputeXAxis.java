@@ -8,6 +8,8 @@ import com.idtk.smallchart.interfaces.iData.IXAxisData;
 import java.text.NumberFormat;
 import java.util.ArrayList;
 
+import static android.R.attr.max;
+
 /**
  * Created by Idtk on 2016/6/6.
  * Blog : http://www.idtkm.com
@@ -61,12 +63,23 @@ public class ComputeXAxis<T extends IBarLineCurveData> extends Compute {
                 minAxisSgin = -1;
             }
 
+            if (maxX == minX){
+                minX = 0;
+            }
+            minX = minX*minAxisSgin;
+            maxX = maxX*maxAxisSgin;
+            if (maxX < minX){
+                float center = minX;
+                minX = maxX;
+                maxX = center;
+            }
+
             if (i==0){
-                xAxisData.setNarrowMin(minX*minAxisSgin);
-                xAxisData.setNarrowMax(maxX*maxAxisSgin);
+                xAxisData.setNarrowMin(minX);
+                xAxisData.setNarrowMax(maxX);
             }else {
-                xAxisData.setNarrowMin(minX*minAxisSgin<xAxisData.getNarrowMin()?minX*minAxisSgin:xAxisData.getNarrowMin());
-                xAxisData.setNarrowMax(maxX*maxAxisSgin>xAxisData.getNarrowMax()?maxX*maxAxisSgin:xAxisData.getNarrowMax());
+                xAxisData.setNarrowMin(minX<xAxisData.getNarrowMin()?minX:xAxisData.getNarrowMin());
+                xAxisData.setNarrowMax(maxX>xAxisData.getNarrowMax()?maxX:xAxisData.getNarrowMax());
             }
 
             initMaxMin(maxX,minX,i,xAxisData);

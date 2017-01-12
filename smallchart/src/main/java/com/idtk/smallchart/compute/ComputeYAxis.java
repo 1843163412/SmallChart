@@ -1,6 +1,7 @@
 package com.idtk.smallchart.compute;
 
 import android.graphics.Paint;
+import android.util.Log;
 
 import com.idtk.smallchart.interfaces.iData.IBarLineCurveData;
 import com.idtk.smallchart.interfaces.iData.IYAxisData;
@@ -95,13 +96,22 @@ public class ComputeYAxis<T extends IBarLineCurveData> extends Compute {
             min=-min;
             minAxisSgin = -1;
         }
-
+        if (max == min){
+            min = 0;
+        }
+        min = min*minAxisSgin;
+        max = max*maxAxisSgin;
+        if (max < min){
+            float center = min;
+            min = max;
+            max = center;
+        }
         if (count==0){
-            yAxisData.setNarrowMin(min*minAxisSgin);
-            yAxisData.setNarrowMax(max*maxAxisSgin);
+            yAxisData.setNarrowMin(min);
+            yAxisData.setNarrowMax(max);
         }else {
-            yAxisData.setNarrowMin(min*minAxisSgin<yAxisData.getNarrowMin()?min*minAxisSgin:yAxisData.getNarrowMin());
-            yAxisData.setNarrowMax(max*maxAxisSgin>yAxisData.getNarrowMax()?max*maxAxisSgin:yAxisData.getNarrowMax());
+            yAxisData.setNarrowMin(min<yAxisData.getNarrowMin()?min:yAxisData.getNarrowMin());
+            yAxisData.setNarrowMax(max>yAxisData.getNarrowMax()?max:yAxisData.getNarrowMax());
         }
         initMaxMin(max,min,count,yAxisData);
     }

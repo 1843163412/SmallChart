@@ -1,5 +1,7 @@
 package com.idtk.smallchart.compute;
 
+import android.util.Log;
+
 import com.idtk.smallchart.interfaces.iData.IAxisData;
 
 /**
@@ -44,8 +46,16 @@ public class Compute {
             min = (float) (Math.floor(min/Math.pow(10,-number)*Math.pow(10,-number)));
         }
 
+        if (max == min){
+            min = 0;
+        }
         min = min*minAxisSgin;
         max = max*maxAxisSgin;
+        if (max < min){
+            float center = min;
+            min = max;
+            max = center;
+        }
         //装最大最小值
         if (count == 0){
             axisData.setMinimum(min);
@@ -95,7 +105,6 @@ public class Compute {
             scaling = (float) (Math.ceil(scaling)*Math.pow(10,-count));
             axisData.setDecimalPlaces(count);
         }
-
         axisData.setInterval(scaling*scalAxisSgin);
         scalAxisSgin = 1;
     }
