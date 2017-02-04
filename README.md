@@ -56,7 +56,7 @@ SdkVersion >= 19
 
 ```
     dependencies {
-	        compile 'com.github.Idtk:SmallChart:v0.1.1'
+	        compile 'com.github.Idtk:SmallChart:v0.1.2'
 	}
 ```
 
@@ -76,7 +76,7 @@ SdkVersion >= 19
     <dependency>
 	    <groupId>com.github.Idtk</groupId>
 	    <artifactId>SmallChart</artifactId>
-	    <version>v0.1.1</version>
+	    <version>v0.1.2</version>
 	</dependency>
 ```
 
