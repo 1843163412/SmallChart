@@ -1,5 +1,5 @@
 # SmallChart
-<br>
+  
 [![](https://jitpack.io/v/Idtk/SmallChart.svg)](https://jitpack.io/#Idtk/SmallChart)
 <br>
 ## Introduction
