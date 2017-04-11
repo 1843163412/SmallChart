@@ -1,8 +1,6 @@
 # SmallChart
 <br>
-
 [![](https://jitpack.io/v/Idtk/SmallChart.svg)](https://jitpack.io/#Idtk/SmallChart)
-
 <br>
 ## Introduction
 &nbsp;&nbsp;&nbsp;&nbsp;SmallChart是一个开源的Android图表库，折线图、曲线图(可填充)、柱状图、扇形图、雷达图，共5种图表类型。特色的组合图表可以任意组合折线图、曲线图、柱状图。可以通过输入的数据以及可设置的颜色、画笔大小等属性方便的创建图表。<br>
